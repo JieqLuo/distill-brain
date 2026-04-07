@@ -16,7 +16,7 @@ Turn your conversations into a structured, navigable knowledge base. Pure markdo
 
 ```
 Your conversations
-       ↓  /kb-extract (you confirm what's worth saving)
+       ↓  /distill (you confirm what's worth saving)
 ~/.claude/kb/
 ├── INDEX.md              ← agent reads this first (~50 lines)
 ├── domains/
@@ -43,7 +43,7 @@ That's it. No dependencies. No build step. No configuration required.
 ### Extract knowledge from a conversation
 
 ```
-/kb-extract
+/distill
 ```
 
 Reviews the current conversation, identifies transferable knowledge, and presents candidates for your approval. Nothing is saved without your explicit confirmation.
@@ -51,7 +51,7 @@ Reviews the current conversation, identifies transferable knowledge, and present
 ### Rebuild indexes
 
 ```
-/kb-compile
+/distill-compile
 ```
 
 Regenerates all INDEX.md files from current entries. Run after manual edits or imports.
@@ -59,10 +59,16 @@ Regenerates all INDEX.md files from current entries. Run after manual edits or i
 ### Search the knowledge base
 
 ```
-/kb-search {query}
+/distill-search {query}
 ```
 
 Agent navigates the three-layer index to find relevant knowledge. Max 5 file reads.
+
+## Where knowledge lives
+
+By default, your knowledge base is stored at `~/.claude/kb/` as plain markdown files. You can configure the path in `.kb-config.yaml`.
+
+**Obsidian compatible.** Point the KB path to a folder inside your Obsidian vault, and your knowledge entries become browsable, searchable, and linkable in Obsidian — with full `[[wikilink]]` support.
 
 ## Design Principles
 
@@ -78,16 +84,16 @@ Agent navigates the three-layer index to find relevant knowledge. Max 5 file rea
 
 ```yaml
 ---
-title: Entry title
+title: Three-Layer Progressive Navigation
 domain: ai-engineering
 created: 2026-04-07
-source: session:my-project:2026-04-07
-tags: [pattern, skill-design]
+source: session:distill-brain:2026-04-07
+tags: [information-architecture, token-efficiency]
 ---
 
-# Entry Title
+# Three-Layer Progressive Navigation
 
-> **Core insight:** One sentence summary for INDEX display.
+> **Core insight:** Root index → domain index → entry. Three reads to find anything, ~200 lines total vs loading the entire knowledge base.
 
 (rest of entry — structure decided by agent based on content type)
 ```
@@ -98,14 +104,14 @@ tags: [pattern, skill-design]
 |------|----------|-----------|
 | Claude Code Memory | Flat MEMORY.md | No relationships, doesn't scale |
 | Obsidian + manual | Human-curated vault | Conversations slip through |
-| claude-mem | Vector DB + background agents | 8GB RAM, crashes after 10h |
+| Vector DB plugins | Embeddings + background agents | High memory usage, crashes over time |
 | RAG systems | Embeddings + retrieval | Infrastructure overhead, opaque |
 | **distill-brain** | **Layered markdown index** | **Pure files, agent-navigable** |
 
 ## Roadmap
 
-- [x] Phase 1: Core loop (`/kb-extract`, `/kb-compile`, `/kb-search`)
-- [ ] Phase 2: Relationship graph + quality (`/kb-graph`, `/kb-lint`)
+- [x] Phase 1: Core loop (`/distill`, `/distill-compile`, `/distill-search`)
+- [ ] Phase 2: Relationship graph + quality (`/distill-graph`, `/distill-lint`)
 - [ ] Phase 3: Obsidian sync, auto-extraction, cross-project sharing
 
 ## License

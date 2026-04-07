@@ -16,7 +16,7 @@
 
 ```
 你的对话
-       ↓  /kb-extract（你确认哪些值得保存）
+       ↓  /distill（你确认哪些值得保存）
 ~/.claude/kb/
 ├── INDEX.md              ← agent 先读这个（~50行）
 ├── domains/
@@ -43,7 +43,7 @@ git clone https://github.com/JieqLuo/distill-brain.git ~/.claude/skills/distill-
 ### 从对话中提取知识
 
 ```
-/kb-extract
+/distill
 ```
 
 分析当前对话，识别可迁移的知识，展示候选列表等你确认。未经你明确同意不会写入任何东西。
@@ -51,7 +51,7 @@ git clone https://github.com/JieqLuo/distill-brain.git ~/.claude/skills/distill-
 ### 重建索引
 
 ```
-/kb-compile
+/distill-compile
 ```
 
 从所有条目重新生成 INDEX.md 文件。手动编辑或导入后运行。
@@ -59,10 +59,16 @@ git clone https://github.com/JieqLuo/distill-brain.git ~/.claude/skills/distill-
 ### 搜索知识库
 
 ```
-/kb-search {查询词}
+/distill-search {查询词}
 ```
 
 Agent 通过三层索引导航找到相关知识。最多 5 次文件读取。
+
+## 知识存储位置
+
+默认存储在 `~/.claude/kb/`，纯 markdown 文件。可以在 `.kb-config.yaml` 中修改路径。
+
+**兼容 Obsidian。** 把 KB 路径指向 Obsidian vault 内的文件夹，知识条目就能在 Obsidian 中浏览、搜索、通过 `[[双链]]` 关联。
 
 ## 设计理念
 
@@ -78,16 +84,16 @@ Agent 通过三层索引导航找到相关知识。最多 5 次文件读取。
 
 ```yaml
 ---
-title: 条目标题
+title: 三层渐进式知识导航
 domain: ai-engineering
 created: 2026-04-07
-source: session:my-project:2026-04-07
-tags: [pattern, skill-design]
+source: session:distill-brain:2026-04-07
+tags: [information-architecture, token-efficiency]
 ---
 
-# 条目标题
+# 三层渐进式知识导航
 
-> **Core insight:** 一句话摘要，用于 INDEX 展示和 agent 快速判断。
+> **Core insight:** 总索引 → 领域索引 → 条目，三次读取找到任何知识，共 ~200 行，无需加载整个知识库。
 
 （条目正文——结构由 agent 根据内容类型自主决定）
 ```
@@ -98,14 +104,14 @@ tags: [pattern, skill-design]
 |------|------|------|
 | Claude Code Memory | 扁平 MEMORY.md | 无关系，不可扩展 |
 | Obsidian + 手动 | 人工整理 | 对话知识容易遗漏 |
-| claude-mem | 向量DB + 后台 agent | 8GB 内存，10 小时后崩溃 |
+| 向量 DB 插件 | Embedding + 后台 agent | 高内存占用，长时间运行不稳定 |
 | RAG 系统 | Embedding + 检索 | 基础设施开销大，不透明 |
 | **distill-brain** | **分层 markdown 索引** | **纯文件，agent 可导航** |
 
 ## 路线图
 
-- [x] Phase 1：核心循环（`/kb-extract`、`/kb-compile`、`/kb-search`）
-- [ ] Phase 2：关系图谱 + 质量检测（`/kb-graph`、`/kb-lint`）
+- [x] Phase 1：核心循环（`/distill`、`/distill-compile`、`/distill-search`）
+- [ ] Phase 2：关系图谱 + 质量检测（`/distill-graph`、`/distill-lint`）
 - [ ] Phase 3：Obsidian 同步、自动提取、跨项目知识共享
 
 ## 许可
