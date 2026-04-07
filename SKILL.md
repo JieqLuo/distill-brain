@@ -28,6 +28,26 @@ You are building a **second brain** for the user — a persistent, structured kn
 
 **Quality over quantity:** One well-articulated pattern is worth more than ten shallow observations. If you're unsure whether something meets the bar, it probably doesn't.
 
+### Cognitive patterns — the third layer
+
+The brain stores two kinds of content:
+1. **What the user knows** — knowledge entries (patterns, decisions, insights, concepts)
+2. **How the user thinks** — cognitive patterns (thinking tendencies, blind spots, strengths, learning style)
+
+Cognitive patterns use `type: cognitive-pattern` and belong in the `self/` domain. They are NOT raw single-conversation observations — they are distilled patterns confirmed across multiple interactions.
+
+**When to extract a cognitive pattern:**
+- You've observed the same thinking tendency across 3+ conversations or situations
+- The pattern is stable enough to be useful (not a one-off mood or context effect)
+- Knowing this pattern would help a future agent collaborate better with this user
+
+**What a cognitive pattern entry looks like:**
+- Core insight describes the pattern objectively (observation, not judgment)
+- Body includes: evidence (when was this observed), impact (how it affects outcomes), and growth angle (how awareness of this could help)
+- Confidence starts lower (`0.6-0.7`) since cognitive patterns are harder to verify than knowledge
+
+**Critical rule:** Cognitive patterns inform how you INTERACT with the user (communication style, when to challenge, when to support). They must NEVER be used to bias knowledge suggestions — if the user tends to favor simplicity, that's a reason to CHALLENGE them with complexity when appropriate, not to filter it out.
+
 ### When to suggest /distill
 
 You should proactively suggest `/distill` when **both** conditions are met:
