@@ -4,6 +4,8 @@ AI-Native personal knowledge management for Claude Code.
 
 Turn your conversations into a structured, navigable knowledge base. Pure markdown, zero background processes, designed for how AI agents actually consume information.
 
+[中文版 README](README_CN.md)
+
 ## What it does
 
 `distill-brain` extracts transferable knowledge from your Claude Code sessions — decisions, patterns, insights, troubleshooting — and organizes them into a layered markdown knowledge base that agents can navigate efficiently.
@@ -31,8 +33,7 @@ Your conversations
 ## Install
 
 ```bash
-# Clone into your Claude Code skills directory
-git clone https://github.com/YOUR_USERNAME/distill-brain.git ~/.claude/skills/distill-brain
+git clone https://github.com/JieqLuo/distill-brain.git ~/.claude/skills/distill-brain
 ```
 
 That's it. No dependencies. No build step. No configuration required.
@@ -106,12 +107,6 @@ tags: [pattern, skill-design]
 - [x] Phase 1: Core loop (`/kb-extract`, `/kb-compile`, `/kb-search`)
 - [ ] Phase 2: Relationship graph + quality (`/kb-graph`, `/kb-lint`)
 - [ ] Phase 3: Obsidian sync, auto-extraction, cross-project sharing
-
-## Inspiration
-
-- [Andrej Karpathy](https://x.com/karpathy) — LLM Knowledge Bases: using LLMs to build personal knowledge bases
-- [Graphify](https://github.com/safishamsi/graphify) — confidence scoring, typed relationships, community detection
-- Built from daily practice with Claude Code + Obsidian knowledge management
 
 ## License
 
