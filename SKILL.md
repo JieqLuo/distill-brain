@@ -109,6 +109,36 @@ supersedes: [replaced-entry-filenames]
 
 Entry body structure is not fixed. Choose sections that fit the knowledge type.
 
+### Dual Relationship View
+
+Relationships are expressed in two places simultaneously — one for agents, one for humans:
+
+1. **`related` YAML in frontmatter** — structured, typed, with strength scores. This is what agents read for navigation, graph building, and relationship inference.
+2. **`## Related` section at the end of entry body** — `[[wikilinks]]` with relationship labels. This is what humans see when browsing in Obsidian or any markdown viewer.
+
+Both views MUST stay in sync. When writing or updating an entry with relationships, always write both. Example:
+
+```markdown
+---
+related:
+  - id: progressive-knowledge-navigation
+    relation: applied-in
+    strength: 0.8
+---
+
+# Entry Title
+
+> **Core insight:** ...
+
+(body)
+
+## Related
+
+- [[progressive-knowledge-navigation]] — applied-in (0.8)
+```
+
+`/distill-compile` checks consistency between the two views and flags mismatches.
+
 ### Navigation Protocol
 
 When you need to find knowledge in the brain:
