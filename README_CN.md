@@ -88,6 +88,14 @@ Agent 通过三层索引导航找到相关知识。最多 5 次文件读取。
 
 处理 `inbox/` 中的条目——建议归属领域、推断关系、经你确认后移入知识库结构。
 
+### 从 Claude Code Memory 导入
+
+```
+/distill-import
+```
+
+读取项目的 `MEMORY.md` 和 memory 文件，筛选出可迁移的跨项目知识导入知识库。项目专属的操作规则留在 auto memory 中。
+
 ## 知识存储位置
 
 默认存储在 `~/.claude/kb/`，纯 markdown 文件。可以在 `.kb-config.yaml` 中修改路径。

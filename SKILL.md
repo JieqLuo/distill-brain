@@ -3,7 +3,7 @@ name: distill-brain
 description: >
   AI-Native personal knowledge management. Distills transferable knowledge from conversations
   into a layered, navigable markdown knowledge base.
-  Use when: user says /distill, /distill-compile, /distill-search, /distill-graph, /distill-lint, /distill-triage, or asks to save/organize/find knowledge.
+  Use when: user says /distill, /distill-compile, /distill-search, /distill-graph, /distill-lint, /distill-triage, /distill-import, or asks to save/organize/find knowledge.
 ---
 
 # distill-brain
@@ -235,3 +235,17 @@ staleness_days:
 6. Run `/distill-compile` to update indexes
 
 **Your call:** Whether an entry fits an existing domain or warrants a new one, what relationships to infer, whether to merge inbox entries that cover the same topic, confidence scoring for inferred relationships.
+
+### /distill-import
+
+**Goal:** Migrate knowledge from Claude Code auto memory (`MEMORY.md` + memory files) into the KB, filtering for entries that meet the transferability test.
+
+**Must do:**
+1. Read the project's `MEMORY.md` index and each referenced memory file
+2. Apply the transferability test: only import entries that contain cross-project knowledge (patterns, decisions, insights). Skip project-specific operational rules, ephemeral state, and task progress — those belong in auto memory.
+3. Present import candidates to user with: proposed title, domain, core insight, and what will NOT be imported (with reasons)
+4. Wait for user confirmation
+5. Write confirmed entries to `domains/{domain}/` or `inbox/`
+6. Run `/distill-compile` to update indexes
+
+**Your call:** Which memory entries qualify as transferable knowledge, how to restructure memory content into the KB entry format, what confidence to assign (typically `confidence_source: imported`), whether to merge multiple related memories into a single KB entry.

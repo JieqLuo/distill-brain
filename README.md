@@ -88,6 +88,14 @@ Checks for stale entries, orphans, broken links, and duplicates. Presents findin
 
 Processes entries in `inbox/` — proposes domain placement, infers relationships, and moves them into the KB structure after your confirmation.
 
+### Import from Claude Code memory
+
+```
+/distill-import
+```
+
+Reads your project's `MEMORY.md` and memory files, filters for transferable cross-project knowledge, and imports qualifying entries into the KB. Project-specific rules stay in auto memory.
+
 ## Where knowledge lives
 
 By default, your knowledge base is stored at `~/.claude/kb/` as plain markdown files. You can configure the path in `.kb-config.yaml`.
