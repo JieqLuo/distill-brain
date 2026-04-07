@@ -17,7 +17,7 @@ Turn your conversations into a structured, navigable knowledge base. Pure markdo
 ```
 Your conversations
        ↓  /distill (you confirm what's worth saving)
-~/.claude/kb/
+~/.claude/brain/
 ├── INDEX.md              ← agent reads this first (~50 lines)
 ├── domains/
 │   ├── ai-engineering/
@@ -86,7 +86,7 @@ Checks for stale entries, orphans, broken links, and duplicates. Presents findin
 /distill-triage
 ```
 
-Processes entries in `inbox/` — proposes domain placement, infers relationships, and moves them into the KB structure after your confirmation.
+Processes entries in `inbox/` — proposes domain placement, infers relationships, and moves them into the brain structure after your confirmation.
 
 ### Import from Claude Code memory
 
@@ -96,13 +96,13 @@ Processes entries in `inbox/` — proposes domain placement, infers relationship
 /distill-import {path}    # specific memory directory
 ```
 
-Reads `MEMORY.md` and memory files, filters for transferable cross-project knowledge, and imports qualifying entries into the KB. Project-specific rules stay in auto memory.
+Reads `MEMORY.md` and memory files, filters for transferable cross-project knowledge, and imports qualifying entries into the brain. Project-specific rules stay in auto memory.
 
 ## Where knowledge lives
 
-By default, your knowledge base is stored at `~/.claude/kb/` as plain markdown files. You can configure the path in `.kb-config.yaml`.
+By default, your knowledge base is stored at `~/.claude/brain/` as plain markdown files. You can configure the path in `.brain-config.yaml`.
 
-**Obsidian compatible.** Point the KB path to a folder inside your Obsidian vault, and your knowledge entries become browsable, searchable, and linkable in Obsidian — with full `[[wikilink]]` support.
+**Obsidian compatible.** Point the brain path to a folder inside your Obsidian vault, and your knowledge entries become browsable, searchable, and linkable in Obsidian — with full `[[wikilink]]` support.
 
 ## Design Principles
 

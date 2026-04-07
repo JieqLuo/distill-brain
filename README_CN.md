@@ -17,7 +17,7 @@
 ```
 你的对话
        ↓  /distill（你确认哪些值得保存）
-~/.claude/kb/
+~/.claude/brain/
 ├── INDEX.md              ← agent 先读这个（~50行）
 ├── domains/
 │   ├── ai-engineering/
@@ -100,9 +100,9 @@ Agent 通过三层索引导航找到相关知识。最多 5 次文件读取。
 
 ## 知识存储位置
 
-默认存储在 `~/.claude/kb/`，纯 markdown 文件。可以在 `.kb-config.yaml` 中修改路径。
+默认存储在 `~/.claude/brain/`，纯 markdown 文件。可以在 `.brain-config.yaml` 中修改路径。
 
-**兼容 Obsidian。** 把 KB 路径指向 Obsidian vault 内的文件夹，知识条目就能在 Obsidian 中浏览、搜索、通过 `[[双链]]` 关联。
+**兼容 Obsidian。** 把 brain 路径指向 Obsidian vault 内的文件夹，知识条目就能在 Obsidian 中浏览、搜索、通过 `[[双链]]` 关联。
 
 ## 设计理念
 
