@@ -146,7 +146,7 @@ tags: [information-architecture, token-efficiency]
 
 - [x] Phase 1: Core loop (`/distill`, `/distill-compile`, `/distill-search`)
 - [x] Phase 2: Graph + quality + triage (`/distill-graph`, `/distill-lint`, `/distill-triage`)
-- [ ] Phase 3: Obsidian sync, auto-extraction, cross-project sharing
+- [x] Phase 3: Obsidian dual-view (YAML + wikilinks), proactive distill suggestions, cross-project sharing
 
 ## License
 

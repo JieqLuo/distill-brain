@@ -146,7 +146,7 @@ tags: [information-architecture, token-efficiency]
 
 - [x] Phase 1：核心循环（`/distill`、`/distill-compile`、`/distill-search`）
 - [x] Phase 2：图谱 + 质量 + 分类（`/distill-graph`、`/distill-lint`、`/distill-triage`）
-- [ ] Phase 3：Obsidian 同步、自动提取、跨项目知识共享
+- [x] Phase 3：Obsidian 双视图（YAML + wikilinks）、主动提取建议、跨项目共享
 
 ## 许可
 
