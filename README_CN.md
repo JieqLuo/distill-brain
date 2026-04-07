@@ -91,10 +91,12 @@ Agent 通过三层索引导航找到相关知识。最多 5 次文件读取。
 ### 从 Claude Code Memory 导入
 
 ```
-/distill-import
+/distill-import           # 当前项目的 memory
+/distill-import all       # 扫描所有项目
+/distill-import {路径}    # 指定 memory 目录
 ```
 
-读取项目的 `MEMORY.md` 和 memory 文件，筛选出可迁移的跨项目知识导入知识库。项目专属的操作规则留在 auto memory 中。
+读取 `MEMORY.md` 和 memory 文件，筛选出可迁移的跨项目知识导入知识库。项目专属的操作规则留在 auto memory 中。
 
 ## 知识存储位置
 

@@ -91,10 +91,12 @@ Processes entries in `inbox/` — proposes domain placement, infers relationship
 ### Import from Claude Code memory
 
 ```
-/distill-import
+/distill-import           # current project's memory
+/distill-import all       # scan all projects
+/distill-import {path}    # specific memory directory
 ```
 
-Reads your project's `MEMORY.md` and memory files, filters for transferable cross-project knowledge, and imports qualifying entries into the KB. Project-specific rules stay in auto memory.
+Reads `MEMORY.md` and memory files, filters for transferable cross-project knowledge, and imports qualifying entries into the KB. Project-specific rules stay in auto memory.
 
 ## Where knowledge lives
 

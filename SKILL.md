@@ -236,16 +236,21 @@ staleness_days:
 
 **Your call:** Whether an entry fits an existing domain or warrants a new one, what relationships to infer, whether to merge inbox entries that cover the same topic, confidence scoring for inferred relationships.
 
-### /distill-import
+### /distill-import {scope}
 
 **Goal:** Migrate knowledge from Claude Code auto memory (`MEMORY.md` + memory files) into the KB, filtering for entries that meet the transferability test.
 
+**Scope argument:**
+- No argument or `current` — import from the current project's memory (`~/.claude/projects/{current-project}/memory/`)
+- `all` — scan all projects under `~/.claude/projects/*/memory/`
+- A path — import from a specific memory directory (e.g., `~/.claude/projects/-Users-jl-Desktop-my-project/memory/`)
+
 **Must do:**
-1. Read the project's `MEMORY.md` index and each referenced memory file
+1. Locate memory files based on scope. Read `MEMORY.md` index and each referenced memory file.
 2. Apply the transferability test: only import entries that contain cross-project knowledge (patterns, decisions, insights). Skip project-specific operational rules, ephemeral state, and task progress — those belong in auto memory.
-3. Present import candidates to user with: proposed title, domain, core insight, and what will NOT be imported (with reasons)
+3. Present import candidates to user with: source project, proposed title, domain, core insight, and what will NOT be imported (with reasons)
 4. Wait for user confirmation
-5. Write confirmed entries to `domains/{domain}/` or `inbox/`
+5. Write confirmed entries to `domains/{domain}/` or `inbox/`, with `source: import:memory:{project-name}` in frontmatter
 6. Run `/distill-compile` to update indexes
 
 **Your call:** Which memory entries qualify as transferable knowledge, how to restructure memory content into the KB entry format, what confidence to assign (typically `confidence_source: imported`), whether to merge multiple related memories into a single KB entry.
