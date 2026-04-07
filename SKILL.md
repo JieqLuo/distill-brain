@@ -3,7 +3,7 @@ name: distill-brain
 description: >
   AI-Native personal knowledge management. Distills transferable knowledge from conversations
   into a layered, navigable markdown knowledge base.
-  Use when: user says /distill, /distill-compile, /distill-search, or asks to save/organize/find knowledge.
+  Use when: user says /distill, /distill-compile, /distill-search, /distill-graph, /distill-lint, /distill-triage, or asks to save/organize/find knowledge.
 ---
 
 # distill-brain
@@ -192,3 +192,46 @@ staleness_days:
 1. Follow the navigation protocol (root INDEX → domain INDEX → entry, max 5 reads)
 
 **Your call:** Which domains to check, whether to Grep for additional matches, how many entries to return, whether to follow relationship links.
+
+### /distill-graph
+
+**Goal:** Build a knowledge graph from all entries, discover clusters and hub nodes, output a readable report and an interactive visualization.
+
+**Must do:**
+1. Scan all entries across all `domains/*/` — read frontmatter (`tags`, `related`) and core insight
+2. Build adjacency: explicit edges from `related` fields (bidirectional) + implicit edges from tag overlap
+3. Identify hub nodes: entries with the most inbound references = knowledge pillars
+4. Detect clusters: groups of entries densely connected by relationships and shared tags
+5. Output two files:
+   - `journal/graph-{date}.md` — markdown report: hub nodes, clusters, orphan entries (no relations, unique tags), suggested new relationships
+   - `graph.html` at KB root — self-contained interactive visualization (inline JS, no external dependencies). Nodes = entries, edges = relationships, color = domain. Openable by double-clicking in any browser.
+
+**Your call:** Clustering algorithm details, edge weight calculation, visualization layout, whether to suggest relationship additions or domain reorganization, level of detail in the report, Mermaid diagram inclusion in the markdown report.
+
+### /distill-lint
+
+**Goal:** Audit the KB for quality issues — stale entries, contradictions, duplicates, orphans, broken links — and suggest fixes.
+
+**Must do:**
+1. Scan all entries across all `domains/*/` — read frontmatter and core insight
+2. Check staleness: compare `created` (or `updated`) against thresholds in `.kb-config.yaml`
+3. Check orphans: entries with no `related` field and no inbound references from other entries
+4. Check broken links: `related` fields that reference non-existent entry filenames
+5. Present findings as a categorized report with suggested actions
+6. Wait for user confirmation before making any changes
+
+**Your call:** Whether to also check for near-duplicate entries (similar titles/tags/insights), whether to flag contradictions between entries, severity ranking of issues, which fixes to auto-apply vs which need manual review.
+
+### /distill-triage
+
+**Goal:** Process `inbox/` entries — assign them to domains, infer relationships, and move them into the KB structure.
+
+**Must do:**
+1. Read `inbox/INDEX.md` and all entries in `inbox/`
+2. Read root INDEX.md to understand existing domain structure
+3. For each inbox entry: propose a target domain (existing or new) and potential relationships
+4. Present triage plan to user for confirmation
+5. Move confirmed entries to `domains/{domain}/`, updating frontmatter as needed
+6. Run `/distill-compile` to update indexes
+
+**Your call:** Whether an entry fits an existing domain or warrants a new one, what relationships to infer, whether to merge inbox entries that cover the same topic, confidence scoring for inferred relationships.

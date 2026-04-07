@@ -64,6 +64,30 @@ git clone https://github.com/JieqLuo/distill-brain.git ~/.claude/skills/distill-
 
 Agent 通过三层索引导航找到相关知识。最多 5 次文件读取。
 
+### 可视化知识图谱
+
+```
+/distill-graph
+```
+
+扫描所有条目，构建关系图谱，识别 Hub 节点和知识聚类。输出 markdown 报告（`journal/graph-{date}.md`）和可交互 HTML 可视化（`graph.html`），浏览器双击即可打开。
+
+### 知识质量审计
+
+```
+/distill-lint
+```
+
+检查过期条目、孤立条目、断链、重复内容。展示发现和修复建议，经你确认后执行。
+
+### 分类收件箱
+
+```
+/distill-triage
+```
+
+处理 `inbox/` 中的条目——建议归属领域、推断关系、经你确认后移入知识库结构。
+
 ## 知识存储位置
 
 默认存储在 `~/.claude/kb/`，纯 markdown 文件。可以在 `.kb-config.yaml` 中修改路径。
@@ -111,7 +135,7 @@ tags: [information-architecture, token-efficiency]
 ## 路线图
 
 - [x] Phase 1：核心循环（`/distill`、`/distill-compile`、`/distill-search`）
-- [ ] Phase 2：关系图谱 + 质量检测（`/distill-graph`、`/distill-lint`）
+- [x] Phase 2：图谱 + 质量 + 分类（`/distill-graph`、`/distill-lint`、`/distill-triage`）
 - [ ] Phase 3：Obsidian 同步、自动提取、跨项目知识共享
 
 ## 许可

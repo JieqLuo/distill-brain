@@ -64,6 +64,30 @@ Regenerates all INDEX.md files from current entries. Run after manual edits or i
 
 Agent navigates the three-layer index to find relevant knowledge. Max 5 file reads.
 
+### Visualize the knowledge graph
+
+```
+/distill-graph
+```
+
+Scans all entries, builds a relationship graph, identifies hub nodes and clusters. Outputs a markdown report (`journal/graph-{date}.md`) and an interactive HTML visualization (`graph.html`) you can open in any browser.
+
+### Audit knowledge quality
+
+```
+/distill-lint
+```
+
+Checks for stale entries, orphans, broken links, and duplicates. Presents findings with suggested fixes for your approval.
+
+### Triage inbox entries
+
+```
+/distill-triage
+```
+
+Processes entries in `inbox/` — proposes domain placement, infers relationships, and moves them into the KB structure after your confirmation.
+
 ## Where knowledge lives
 
 By default, your knowledge base is stored at `~/.claude/kb/` as plain markdown files. You can configure the path in `.kb-config.yaml`.
@@ -111,7 +135,7 @@ tags: [information-architecture, token-efficiency]
 ## Roadmap
 
 - [x] Phase 1: Core loop (`/distill`, `/distill-compile`, `/distill-search`)
-- [ ] Phase 2: Relationship graph + quality (`/distill-graph`, `/distill-lint`)
+- [x] Phase 2: Graph + quality + triage (`/distill-graph`, `/distill-lint`, `/distill-triage`)
 - [ ] Phase 3: Obsidian sync, auto-extraction, cross-project sharing
 
 ## License
