@@ -98,6 +98,14 @@ Processes entries in `inbox/` — proposes domain placement, infers relationship
 
 Reads `MEMORY.md` and memory files, filters for transferable cross-project knowledge, and imports qualifying entries into the brain. Project-specific rules stay in auto memory.
 
+### Learn with verified understanding
+
+```
+/distill-learn {topic}
+```
+
+Socratic learning mode. Instead of passively storing what you say, the agent probes your understanding — asks why/how questions, tests transfer to other domains using your existing brain entries, and challenges weak spots. Only distills once you demonstrate genuine comprehension. Entries get `confidence_source: verified`.
+
 ## Where knowledge lives
 
 By default, your knowledge base is stored at `~/.claude/brain/` as plain markdown files. You can configure the path in `.brain-config.yaml`.

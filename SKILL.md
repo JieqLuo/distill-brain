@@ -3,7 +3,7 @@ name: distill-brain
 description: >
   AI-Native personal knowledge management. Distills transferable knowledge from conversations
   into a layered, navigable markdown knowledge base.
-  Use when: user says /distill, /distill-compile, /distill-search, /distill-graph, /distill-lint, /distill-triage, /distill-import, or asks to save/organize/find knowledge.
+  Use when: user says /distill, /distill-compile, /distill-search, /distill-graph, /distill-lint, /distill-triage, /distill-import, /distill-learn, or asks to save/organize/find knowledge.
 ---
 
 # distill-brain
@@ -298,3 +298,18 @@ staleness_days:
 6. Run `/distill-compile` to update indexes
 
 **Your call:** Which memory entries qualify as transferable knowledge, how to restructure memory content into the brain entry format, what confidence to assign (typically `confidence_source: imported`), whether to merge multiple related memories into a single brain entry.
+
+### /distill-learn {topic}
+
+**Goal:** Active learning facilitation — verify the user's understanding of a new concept through Socratic questioning, cross-reference with existing brain entries for transfer testing, and only distill once comprehension is demonstrated.
+
+**Must do:**
+1. Read root INDEX.md and relevant domain indexes to know what the user already has in their brain
+2. Ask the user to explain the concept in their own words — do NOT lecture or teach first
+3. Probe for genuine understanding: ask "why" and "how" questions, not "what" questions. Target the mechanism, not the definition.
+4. Test transfer: find existing brain entries that share structural similarities with the new concept and ask the user to identify the connection. ("Your brain has X — how does this new concept relate?")
+5. Identify and challenge weak spots: if the user's explanation is surface-level or contains misconceptions, ask follow-up questions that expose the gap — don't correct directly
+6. Once the user demonstrates understanding (can explain mechanism, can transfer to other contexts, can identify edge cases), proceed to `/distill` the verified insight
+7. The resulting entry gets `confidence_source: verified` and higher confidence than a standard extraction
+
+**Your call:** How many questions to ask (adapt to complexity — simple concept may need 2, deep concept may need 5+), which existing brain entries are structurally similar enough for transfer testing, when to push harder vs when the user has demonstrated sufficient understanding, whether to suggest the user revisit the topic later if comprehension is clearly insufficient.

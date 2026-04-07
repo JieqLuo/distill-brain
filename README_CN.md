@@ -98,6 +98,14 @@ Agent 通过三层索引导航找到相关知识。最多 5 次文件读取。
 
 读取 `MEMORY.md` 和 memory 文件，筛选出可迁移的跨项目知识导入知识库。项目专属的操作规则留在 auto memory 中。
 
+### 验证式学习
+
+```
+/distill-learn {主题}
+```
+
+苏格拉底学习模式。Agent 不直接教你，而是通过提问验证你的理解——追问为什么和怎么做、用你 brain 里已有的知识测试迁移能力、挑战薄弱环节。只有证明真正理解后才提取进 brain。条目标记 `confidence_source: verified`。
+
 ## 知识存储位置
 
 默认存储在 `~/.claude/brain/`，纯 markdown 文件。可以在 `.brain-config.yaml` 中修改路径。
