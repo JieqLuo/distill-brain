@@ -1,0 +1,17 @@
+{
+  "name": "distill-brain",
+  "description": "AI-Native personal knowledge management for Claude Code. Extracts transferable knowledge from conversations into a layered, navigable markdown knowledge base.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Jay"
+  },
+  "license": "MIT",
+  "keywords": [
+    "knowledge-base",
+    "memory",
+    "knowledge-management",
+    "second-brain",
+    "markdown"
+  ],
+  "skills": "./"
+}
