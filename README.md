@@ -19,7 +19,8 @@ No vector databases, no embeddings, no background processes. Just markdown files
 ### What makes it different
 
 - **Stores processing, not knowledge.** LLMs already know textbook content. Your brain stores what they don't — your judgments, your real-world validations, the delta between theory and practice.
-- **Three-layer architecture.** Raw Sources (immutable evidence) → Wiki (your processed knowledge) → Schema (how the brain works). Based on Karpathy's LLM-wiki design, with auto write-back to inbox for zero-friction knowledge capture.
+- **Karpathy's three-layer architecture.** Raw Sources (immutable evidence) + Wiki (your processed knowledge) + Schema (how the brain works). Three co-existing layers inherited from Karpathy's LLM-wiki.
+- **Two-tier knowledge (inbox + domains).** inbox/ is the LLM's auto-maintained wiki — captures everything, nothing gets lost. domains/ is your confirmed knowledge — only entries verified through `/distill`, `/distill-learn`, or `/distill-challenge` enter. Like how your mind has "things you know" vs "things you've verified through experience".
 - **Socratic learning.** `/distill-learn` doesn't just save what you say. It challenges your understanding, tests transfer across domains using your existing brain entries, and only distills once you prove you get it.
 - **Three-layer challenge.** `/distill-challenge` uses your brain as targeting context but draws ammunition from outside — finding internal contradictions (Layer 1), attacking blind spots (Layer 2), and introducing perspectives you've never encountered (Layer 3).
 - **Repo comprehension.** `/distill-repo` helps you genuinely understand a codebase through guided Q&A — then "compiles" the knowledge so you never pay the full token cost again (60-80% savings on every subsequent access).
@@ -52,7 +53,7 @@ No vector databases, no embeddings, no background processes. Just markdown files
 
 **Three reads to find anything.** Root INDEX → domain INDEX → entry. ~200 lines total vs loading your entire brain.
 
-**Auto write-back.** Valuable query results are automatically captured to `inbox/`. User runs `/distill-triage` to review: accept the draft as-is (fast) or re-process from source (thorough). Karpathy's speed + distill-brain's quality.
+**Two-tier knowledge.** `inbox/` is the LLM's auto-maintained wiki (Karpathy's speed — nothing gets lost). `domains/` is your confirmed knowledge (only entries verified through `/distill`, `/distill-learn`, or `/distill-challenge` enter here). Quality requires human eyes — same as Karpathy, but you only need to look at what hasn't been verified through learning or challenge.
 
 ## Install
 
@@ -164,7 +165,7 @@ By default, your knowledge base is stored at `~/.claude/brain/` as plain markdow
 
 **Token-efficient by design.** Knowledge is "compiled" once and reused. Reading a brain entry (~100 lines) vs re-reading source material (~3000+ lines) saves 60-80% tokens on every subsequent access. The more you use it, the more you save.
 
-**AI captures, human decides.** Valuable syntheses are auto-captured to inbox/ (Karpathy's compounding). But nothing enters your formal knowledge base (domains/) without your confirmation (quality gate).
+**AI captures, human decides.** inbox/ auto-accumulates (Karpathy's compounding). But domains/ only accepts knowledge you've verified through extraction, learning, or challenge. Quality requires human eyes — no shortcuts.
 
 ## Comparison
 

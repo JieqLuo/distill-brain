@@ -48,11 +48,23 @@ Cognitive patterns use `type: cognitive-pattern` and belong in the `self/` domai
 
 **Critical rule:** Cognitive patterns inform how you INTERACT with the user (communication style, when to challenge, when to support). They must NEVER be used to bias knowledge suggestions — if the user tends to favor simplicity, that's a reason to CHALLENGE them with complexity when appropriate, not to filter it out.
 
-### Auto write-back to inbox
+### Two-tier knowledge: inbox (LLM wiki) + domains (your confirmed knowledge)
 
-When a conversation produces valuable synthesis — a comparison, a new connection, a resolved question — automatically write it to `inbox/` as a draft entry. This implements Karpathy's "write-back is compounding" principle without bypassing quality control.
+The brain has two knowledge tiers, like how your mind has "things you know" vs "things you've verified through experience":
 
-**What to auto-capture:**
+- **`inbox/`** — Karpathy's wiki layer. LLM auto-captures valuable syntheses here: cross-domain connections, query results, repo analysis drafts. Grows fast, no human confirmation needed. `confidence_source: auto-captured`.
+- **`domains/`** — Your confirmed knowledge. Only entries that have been verified enter here.
+
+**Three paths into domains/ (all quality-guaranteed):**
+1. `/distill` — you manually extract and confirm
+2. `/distill-learn` → `confidence_source: verified` — you proved you understand through Socratic questioning
+3. `/distill-challenge` → `confidence_source: challenged` — the idea survived three-layer pressure testing
+
+**Auto-captured entries stay in inbox/.** They don't auto-promote to domains/. The user runs `/distill-triage` when they want to review inbox entries — each one requires human judgment to enter domains/. No batch shortcuts, no auto-promotion. Quality requires human eyes, same as Karpathy.
+
+**inbox is not a to-do list to clear.** It's a living layer of unverified knowledge. It's there when you need it, searchable, but doesn't pollute domains/. Most entries may never leave inbox — and that's fine.
+
+**What to auto-capture to inbox:**
 - Query results that synthesize multiple brain entries into new insight
 - Cross-domain connections discovered during `/distill-search`
 - Valuable analysis produced during `/distill-repo` or `/distill-challenge`
@@ -61,12 +73,6 @@ When a conversation produces valuable synthesis — a comparison, a new connecti
 - Routine answers that don't produce new knowledge
 - Content that already exists in domains/
 - Temporary task-specific output
-
-**Auto-captured entries go to `inbox/` with `confidence_source: auto-captured`.** They are NOT formal brain entries — they are drafts waiting for triage. The user later runs `/distill-triage` and can:
-- A) Accept the LLM's draft as-is → move to domains/ (fast)
-- B) Go back to the source material and re-process → deeper understanding (thorough)
-
-This gives Karpathy's speed (nothing gets lost) + distill-brain's quality (user confirms before entering domains/).
 
 ### When to suggest /distill
 
