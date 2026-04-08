@@ -148,13 +148,15 @@ tags: [information-architecture, token-efficiency]
 | Obsidian + 手动 | 人工整理 | 对话知识容易遗漏 |
 | 向量 DB 插件 | Embedding + 后台 agent | 高内存占用，长时间运行不稳定 |
 | RAG 系统 | Embedding + 检索 | 基础设施开销大，不透明 |
-| **distill-brain** | **分层 markdown 索引** | **纯文件，agent 可导航** |
+| AI 教学工具 | 内容推送 + 测验 | 无持久知识图谱，无跨领域迁移 |
+| **distill-brain** | **分层 markdown 索引 + 苏格拉底式学习 + 认知模式** | **纯文件，agent 可导航，跨平台** |
 
 ## 路线图
 
 - [x] Phase 1：核心循环（`/distill`、`/distill-compile`、`/distill-search`）
 - [x] Phase 2：图谱 + 质量 + 分类（`/distill-graph`、`/distill-lint`、`/distill-triage`）
 - [x] Phase 3：Obsidian 双视图（YAML + wikilinks）、主动提取建议、跨项目共享
+- [ ] Phase 4：多工具支持（Codex、OpenCode、Factory Droid）、交互式图谱可视化
 
 ## 许可
 

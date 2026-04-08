@@ -148,13 +148,15 @@ tags: [information-architecture, token-efficiency]
 | Obsidian + manual | Human-curated vault | Conversations slip through |
 | Vector DB plugins | Embeddings + background agents | High memory usage, crashes over time |
 | RAG systems | Embeddings + retrieval | Infrastructure overhead, opaque |
-| **distill-brain** | **Layered markdown index** | **Pure files, agent-navigable** |
+| AI tutoring tools | Content delivery + quizzes | No persistent knowledge graph, no cross-domain transfer |
+| **distill-brain** | **Layered markdown index + Socratic learning + cognitive patterns** | **Pure files, agent-navigable, platform-agnostic** |
 
 ## Roadmap
 
 - [x] Phase 1: Core loop (`/distill`, `/distill-compile`, `/distill-search`)
 - [x] Phase 2: Graph + quality + triage (`/distill-graph`, `/distill-lint`, `/distill-triage`)
 - [x] Phase 3: Obsidian dual-view (YAML + wikilinks), proactive distill suggestions, cross-project sharing
+- [ ] Phase 4: Multi-tool support (Codex, OpenCode, Factory Droid), interactive graph visualization
 
 ## License
 
