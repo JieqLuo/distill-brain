@@ -114,6 +114,14 @@ Reads `MEMORY.md` and memory files, filters for transferable cross-project knowl
 
 Socratic learning mode. Instead of passively storing what you say, the agent probes your understanding — asks why/how questions, tests transfer to other domains using your existing brain entries, and challenges weak spots. Only distills once you demonstrate genuine comprehension. Entries get `confidence_source: verified`.
 
+### Pressure-test an idea
+
+```
+/distill-challenge {idea or topic}
+```
+
+Three-layer challenge mode. Uses your brain as targeting context but draws ammunition from outside your knowledge. Layer 1: finds contradictions within your existing entries. Layer 2: attacks blind spots (what's missing from your brain). Layer 3: introduces perspectives from outside your knowledge graph entirely. No sycophancy — the challenger takes positions and states what evidence would change its mind. Surviving ideas get `confidence_source: challenged`.
+
 ## Where knowledge lives
 
 By default, your knowledge base is stored at `~/.claude/brain/` as plain markdown files. You can configure the path in `.brain-config.yaml`.

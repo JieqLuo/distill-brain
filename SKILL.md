@@ -3,7 +3,7 @@ name: distill-brain
 description: >
   AI-Native personal knowledge management. Distills transferable knowledge from conversations
   into a layered, navigable markdown knowledge base.
-  Use when: user says /distill, /distill-compile, /distill-search, /distill-graph, /distill-lint, /distill-triage, /distill-import, /distill-learn, /distill-repo, or asks to save/organize/find knowledge.
+  Use when: user says /distill, /distill-compile, /distill-search, /distill-graph, /distill-lint, /distill-triage, /distill-import, /distill-learn, /distill-challenge, /distill-repo, or asks to save/organize/find knowledge.
 ---
 
 # distill-brain
@@ -332,7 +332,40 @@ staleness_days:
 6. Once the user demonstrates understanding (can explain mechanism, can transfer to other contexts, can identify edge cases), proceed to `/distill` the verified insight
 7. The resulting entry gets `confidence_source: verified` and higher confidence than a standard extraction
 
+**Brain-based challenging:** Don't only test whether the user understands the new concept — use existing brain entries to create harder challenges:
+- Find entries that structurally resemble the new concept and ask the user to identify the connection
+- Find entries that might CONTRADICT the new concept and ask the user to reconcile
+- Identify what's MISSING from the brain that this new concept implies ("Your brain has nothing about X, but this concept depends on it — what do you know about X?")
+
 **Your call:** How many questions to ask (adapt to complexity — simple concept may need 2, deep concept may need 5+), which existing brain entries are structurally similar enough for transfer testing, when to push harder vs when the user has demonstrated sufficient understanding, whether to suggest the user revisit the topic later if comprehension is clearly insufficient.
+
+### /distill-challenge {idea or topic}
+
+**Goal:** Pressure-test an idea, decision, or assumption through three layers of challenge — using the brain as targeting context but drawing ammunition from outside the user's knowledge.
+
+**Must do:**
+1. Read root INDEX.md and relevant domain entries to understand the user's existing knowledge landscape
+2. Ask the user to state their idea or position clearly
+3. Apply three layers of challenge, one at a time:
+
+   **Layer 1 — Internal contradictions:** Find entries in the brain that contradict or tension with the stated idea. Ask the user to reconcile. ("Your brain says X, but now you're saying Y. What changed, or what am I missing?")
+
+   **Layer 2 — Blind spot attack:** Analyze what's ABSENT from the brain that the idea depends on. Challenge the gaps. ("Your brain has 5 entries on AI engineering but 0 on user research. Your idea assumes users want this — what evidence do you have?")
+
+   **Layer 3 — Outside perspective:** Draw from LLM training knowledge, web search if needed, or cross-domain analogies the user has NOT encountered. Introduce genuinely new information that challenges the idea's premises. ("Research in cognitive science suggests the opposite of what you're assuming. How do you respond?")
+
+4. After each layer, let the user respond. Adapt: if they have a good answer, push harder. If they're struggling, help them articulate why.
+5. Do NOT be sycophantic. Never say "that's interesting" — take a position and state what evidence would change your mind.
+6. End with a synthesis: what survived the challenge, what didn't, what needs more evidence.
+7. If the idea survives all three layers, offer to `/distill` the stress-tested insight with `confidence_source: challenged`.
+
+**Anti-sycophancy rules:**
+- Never say "that's an interesting approach" — take a position instead
+- Never say "there are many ways to think about this" — pick one and state what evidence would change your mind
+- Never say "that could work" — say whether it WILL work based on available evidence, and what's missing
+- Challenge the strongest version of the user's claim, not a strawman
+
+**Your call:** How hard to push (adapt to user's engagement — if they're energized by challenge, go harder; if they're frustrated, offer a constructive reframe), whether to use web search for Layer 3, how many rounds per layer, when to stop and synthesize.
 
 ### /distill-repo {url or local path}
 
