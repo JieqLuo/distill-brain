@@ -1,8 +1,8 @@
 # distill-brain
 
-AI-Native personal knowledge management for Claude Code.
+Your AI-powered second brain. Distills your unique understanding — not raw knowledge — from conversations, codebases, and practice into a persistent, navigable knowledge base that grows with you.
 
-Turn your conversations into a structured, navigable knowledge base. Pure markdown, zero background processes, designed for how AI agents actually consume information.
+Inspired by [Andrej Karpathy's LLM-wiki vision](https://x.com/karpathy). Pure markdown, zero background processes, designed for how AI agents actually consume information.
 
 [中文版 README](README_CN.md)
 
@@ -11,6 +11,14 @@ Turn your conversations into a structured, navigable knowledge base. Pure markdo
 `distill-brain` extracts transferable knowledge from your Claude Code sessions — decisions, patterns, insights, troubleshooting — and organizes them into a layered markdown knowledge base that agents can navigate efficiently.
 
 **Not another RAG system.** No vector databases, no embeddings, no background processes. Just markdown files with a three-layer index that agents read on demand.
+
+### What makes it different
+
+- **Stores processing, not knowledge.** LLMs already know textbook content. Your brain stores what they don't — your judgments, your real-world validations, the delta between theory and practice.
+- **Socratic learning.** `/distill-learn` doesn't just save what you say. It challenges your understanding, tests transfer across domains, and only distills once you prove you get it.
+- **Repo comprehension.** `/distill-repo` helps you genuinely understand a codebase through guided Q&A — then "compiles" the knowledge so you never pay the full token cost again (60-80% savings on every subsequent access).
+- **Cognitive patterns.** Over time, the agent observes how you think — not just what you know — and stores distilled patterns that help future agents collaborate with you better.
+- **Platform-agnostic brain.** Pure markdown files. Works with Obsidian, any text editor, or any AI tool that can read files. Your brain is yours, not locked to any platform.
 
 ## How it works
 
@@ -121,6 +129,8 @@ By default, your knowledge base is stored at `~/.claude/brain/` as plain markdow
 **Zero infrastructure.** No databases, no servers, no background processes. If your computer crashes, your knowledge is still there in readable markdown files.
 
 **Agent-native navigation.** Three-layer progressive disclosure means agents load ~200 lines to find what they need, not your entire knowledge base.
+
+**Token-efficient by design.** Knowledge is "compiled" once and reused. Reading a brain entry (~100 lines) vs re-reading source material (~3000+ lines) saves 60-80% tokens on every subsequent access. The more you use it, the more you save.
 
 ## Knowledge Entry Format
 

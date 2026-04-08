@@ -3,7 +3,7 @@ name: distill-brain
 description: >
   AI-Native personal knowledge management. Distills transferable knowledge from conversations
   into a layered, navigable markdown knowledge base.
-  Use when: user says /distill, /distill-compile, /distill-search, /distill-graph, /distill-lint, /distill-triage, /distill-import, /distill-learn, or asks to save/organize/find knowledge.
+  Use when: user says /distill, /distill-compile, /distill-search, /distill-graph, /distill-lint, /distill-triage, /distill-import, /distill-learn, /distill-repo, or asks to save/organize/find knowledge.
 ---
 
 # distill-brain
@@ -333,3 +333,21 @@ staleness_days:
 7. The resulting entry gets `confidence_source: verified` and higher confidence than a standard extraction
 
 **Your call:** How many questions to ask (adapt to complexity — simple concept may need 2, deep concept may need 5+), which existing brain entries are structurally similar enough for transfer testing, when to push harder vs when the user has demonstrated sufficient understanding, whether to suggest the user revisit the topic later if comprehension is clearly insufficient.
+
+### /distill-repo {url or local path}
+
+**Goal:** Analyze a codebase to extract architecture patterns and design decisions, guide the user to understand them through Socratic questioning, and store both the architecture reference and verified insights.
+
+**Must do:**
+1. Read the repo progressively — minimize token consumption:
+   - Layer 0: file tree + README (~100 lines) → understand what it is
+   - Layer 1: entry points + architecture docs (~500 lines) → understand structure
+   - Layer 2: specific files of interest → deep dive only as needed
+2. Present an architecture overview to the user — core structure, key design decisions, notable patterns. Keep it concise.
+3. Switch to Socratic mode: ask the user WHY questions about the architecture ("Why do you think they chose X over Y?"), test transfer against existing brain entries ("Your brain has Z — how does this repo's approach compare?")
+4. Store two types of entries after user confirmation:
+   - `type: reference` — architecture skeleton with key design decisions and rationale. Always store this for repos, since code may not be in training data. `source: repo:{url}`
+   - `type: insight/pattern` — user's verified understanding and cross-repo patterns. `confidence_source: verified`
+5. Run `/distill-compile` to update indexes
+
+**Your call:** How deep to read the repo (adapt to repo size and complexity), which files are architecturally significant, how many Socratic questions to ask, what relationships to infer with existing brain entries, whether to suggest the user clone and explore the repo hands-on for deeper understanding.
