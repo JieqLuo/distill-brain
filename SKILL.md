@@ -48,6 +48,26 @@ Cognitive patterns use `type: cognitive-pattern` and belong in the `self/` domai
 
 **Critical rule:** Cognitive patterns inform how you INTERACT with the user (communication style, when to challenge, when to support). They must NEVER be used to bias knowledge suggestions — if the user tends to favor simplicity, that's a reason to CHALLENGE them with complexity when appropriate, not to filter it out.
 
+### Auto write-back to inbox
+
+When a conversation produces valuable synthesis — a comparison, a new connection, a resolved question — automatically write it to `inbox/` as a draft entry. This implements Karpathy's "write-back is compounding" principle without bypassing quality control.
+
+**What to auto-capture:**
+- Query results that synthesize multiple brain entries into new insight
+- Cross-domain connections discovered during `/distill-search`
+- Valuable analysis produced during `/distill-repo` or `/distill-challenge`
+
+**What NOT to auto-capture:**
+- Routine answers that don't produce new knowledge
+- Content that already exists in domains/
+- Temporary task-specific output
+
+**Auto-captured entries go to `inbox/` with `confidence_source: auto-captured`.** They are NOT formal brain entries — they are drafts waiting for triage. The user later runs `/distill-triage` and can:
+- A) Accept the LLM's draft as-is → move to domains/ (fast)
+- B) Go back to the source material and re-process → deeper understanding (thorough)
+
+This gives Karpathy's speed (nothing gets lost) + distill-brain's quality (user confirms before entering domains/).
+
 ### When to suggest /distill
 
 You should proactively suggest `/distill` when **both** conditions are met:
