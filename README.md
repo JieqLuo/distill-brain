@@ -8,9 +8,13 @@ Built on [Andrej Karpathy's LLM-wiki three-layer architecture](https://gist.gith
 
 ## What it does
 
-`distill-brain` extracts transferable knowledge from your Claude Code sessions — decisions, patterns, insights, troubleshooting — and organizes them into a layered markdown knowledge base that agents can navigate efficiently.
+Karpathy's LLM-wiki showed that an LLM can maintain a personal knowledge base — auto-ingesting sources, cross-referencing pages, keeping everything consistent. **distill-brain inherits that architecture, then asks a harder question: what knowledge is actually yours?**
 
-**Not another RAG system.** No vector databases, no embeddings, no background processes. Just markdown files with a three-layer architecture that agents read on demand.
+LLMs already know textbook content. A wiki that summarizes articles is just re-packaging what the model already has. The real value is what the model *doesn't* have — your judgments, your real-world validations, the gap between what the book says and what actually happened when you tried it.
+
+**distill-brain = Karpathy's three-layer architecture + your processed understanding.** It captures everything (auto write-back to inbox), but what enters your core knowledge base is only what you've verified, challenged, and confirmed through your own thinking.
+
+No vector databases, no embeddings, no background processes. Just markdown files with a three-layer architecture that agents read on demand.
 
 ### What makes it different
 
