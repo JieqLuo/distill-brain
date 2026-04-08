@@ -156,7 +156,8 @@ tags: [information-architecture, token-efficiency]
 - [x] Phase 1：核心循环（`/distill`、`/distill-compile`、`/distill-search`）
 - [x] Phase 2：图谱 + 质量 + 分类（`/distill-graph`、`/distill-lint`、`/distill-triage`）
 - [x] Phase 3：Obsidian 双视图（YAML + wikilinks）、主动提取建议、跨项目共享
-- [ ] Phase 4：多工具支持（Codex、OpenCode、Factory Droid）、交互式图谱可视化
+- [ ] Phase 4：`/distill-repo`（从代码库提取模式）、多工具支持（Codex、OpenCode、Factory Droid）
+- [ ] Phase 5：交互式可视化——结构全景（领域密度、Hub 节点、孤岛）+ 导航回放（实时看 agent 如何在 brain 中搜索）
 
 ## 许可
 

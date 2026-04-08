@@ -156,7 +156,8 @@ tags: [information-architecture, token-efficiency]
 - [x] Phase 1: Core loop (`/distill`, `/distill-compile`, `/distill-search`)
 - [x] Phase 2: Graph + quality + triage (`/distill-graph`, `/distill-lint`, `/distill-triage`)
 - [x] Phase 3: Obsidian dual-view (YAML + wikilinks), proactive distill suggestions, cross-project sharing
-- [ ] Phase 4: Multi-tool support (Codex, OpenCode, Factory Droid), interactive graph visualization
+- [ ] Phase 4: `/distill-repo` (extract patterns from codebases), multi-tool support (Codex, OpenCode, Factory Droid)
+- [ ] Phase 5: Interactive visualization — structure overview (domain density, hub nodes, orphans) + live navigation replay (watch agent traverse the brain in real-time)
 
 ## License
 
