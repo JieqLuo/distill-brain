@@ -1,6 +1,6 @@
 # distill-brain
 
-A second brain that teaches you back. Built on [Karpathy's LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) architecture — same three layers (raw sources, compiled wiki, schema), but the wiki isn't just a reference. It's a tutor.
+A second brain that grows you, not just your collection. Built on [Karpathy's LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) architecture — same three layers (raw sources, compiled wiki, schema), but what gets stored, how it gets there, and what it does for you afterward are fundamentally different.
 
 [中文版 README](README_CN.md) · [Read the idea file](https://gist.github.com/JieqLuo/41761c7fbe48b233f6bf6b50ddee5d95)
 
@@ -8,17 +8,33 @@ A second brain that teaches you back. Built on [Karpathy's LLM Wiki](https://gis
 
 Karpathy's LLM Wiki solved a real problem: RAG re-derives knowledge on every query, while a persistent wiki compounds over time. The LLM does the bookkeeping — summarizing, cross-referencing, maintaining consistency — and the human curates sources and asks good questions. This works.
 
-But I kept noticing something. My wiki had great entries that I couldn't explain to anyone. The LLM had read the papers, written the summaries, maintained the cross-references. I could search for anything and get a well-organized answer. But when someone asked me about a topic in my own wiki, I'd find myself re-reading my own pages to answer them.
+But I kept running into three problems that a library can't solve.
 
-**The wiki knew things. I didn't.**
+### 1. The wiki knew things. I didn't.
 
-This isn't a flaw in Karpathy's design — it's a different use case. His wiki is a **library**: you build it to look things up. What I wanted was a **tutor**: something that makes sure I understand what goes into it.
+My wiki had great entries I couldn't explain to anyone. The LLM had read the papers, written the summaries, maintained the cross-references. But when someone asked me about a topic in my own wiki, I'd find myself re-reading my own pages to answer them. The wiki was getting smarter. I wasn't.
 
-In cognitive science, the *generation effect* shows that information you produce yourself — by explaining, by struggling with a question, by reconciling contradictions — is retained far better than information you passively read. The *testing effect* shows that retrieval strengthens memory more than additional study. distill-brain puts both to work: the LLM challenges you using your own knowledge base as context, and only writes the entry after you demonstrate understanding.
+An auto-compiled wiki stores what the LLM extracted. But LLMs already know textbook content — re-packaging it adds zero value. The real value is what only you have: your judgments, the gap between what the book said and what happened when you tried it, the sparks that flew when you argued with the LLM about an idea. distill-brain stores knowledge that has passed through your thinking — through dialogue, through challenge, through practice. What ends up in the brain is uniquely yours.
 
-The LLM Wiki is a library with a very good librarian. distill-brain adds a tutor who sits in the library. Before a book goes on the shelf, the tutor asks you what you learned from it. Before you commit to an idea, the tutor stress-tests it using everything else on the shelves. The library still works as a library. But you walk out knowing more than you walked in with.
+### 2. The collection grew. I didn't grow with it.
 
-**The librarian maintains the collection. The tutor maintains *you*.**
+Adding a source, reviewing a summary, approving an entry — none of that requires you to actually think. You can build an impressive wiki on autopilot.
+
+In cognitive science, the *generation effect* shows that information you produce yourself — by explaining, by struggling with a question, by reconciling contradictions — is retained far better than information you passively read. The *testing effect* shows that retrieval strengthens memory more than additional study. distill-brain puts both to work: the LLM doesn't just file your knowledge, it challenges you before writing anything down. The entry is a receipt. The real output is what changed in your head.
+
+### 3. Each new thing lived in isolation.
+
+A wiki cross-references pages for navigation. But I wanted something more: when I encounter a new concept, I want to know how it connects to what I've already learned, what it contradicts, what it extends, what gaps it reveals.
+
+distill-brain reads your existing knowledge every time you learn something new. It asks: *"Your brain has an entry on X from three months ago. This new concept seems to contradict it — how do you reconcile that?"* Or: *"You learned Y in a different domain. Do you see the structural similarity?"* The more knowledge you accumulate, the more connections each new entry can trigger. Your understanding compounds — not just your collection.
+
+### The metaphor
+
+The LLM Wiki is a library with a very good librarian. You bring in books. The librarian catalogs them, maintains cross-references, and helps you find what you need.
+
+distill-brain adds two things. A tutor who asks what you learned before a book goes on the shelf. And a network that lights up every time a new book arrives — showing you how it connects to everything already there.
+
+**The librarian maintains the collection. distill-brain maintains *you*.**
 
 ## Install
 
