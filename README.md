@@ -136,15 +136,6 @@ Over time, the agent also observes *how you think* — not just what you know �
 | AI tutoring tools | Content delivery + quizzes | No persistent knowledge graph |
 | **distill-brain** | **Three-layer architecture + Socratic learning + pressure testing** | **Pure files, agent-navigable, platform-agnostic** |
 
-## Roadmap
-
-- [x] Core loop (`/distill`, `/distill-compile`, `/distill-search`)
-- [x] Graph + quality + triage (`/distill-graph`, `/distill-lint`, `/distill-triage`)
-- [x] Obsidian dual-view, proactive distill suggestions, cross-project sharing
-- [x] `/distill-repo`, `/distill-challenge`, raw sources layer, auto write-back
-- [ ] Multi-tool support (Codex, OpenCode, Factory Droid)
-- [ ] Interactive visualization — structure overview + live navigation replay
-
 ## License
 
 MIT

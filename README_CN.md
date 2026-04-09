@@ -136,15 +136,6 @@ LLM 已经知道教科书内容。再存一遍是零价值的重复。distill-br
 | AI 教学工具 | 内容推送 + 测验 | 无持久知识图谱 |
 | **distill-brain** | **三层架构 + 苏格拉底式学习 + 压力测试** | **纯文件，agent 可导航，跨平台** |
 
-## 路线图
-
-- [x] 核心循环（`/distill`、`/distill-compile`、`/distill-search`）
-- [x] 图谱 + 质量 + 分类（`/distill-graph`、`/distill-lint`、`/distill-triage`）
-- [x] Obsidian 双视图、主动提取建议、跨项目共享
-- [x] `/distill-repo`、`/distill-challenge`、Raw Sources 层、自动回写
-- [ ] 多工具支持（Codex、OpenCode、Factory Droid）
-- [ ] 交互式可视化——结构全景 + 导航回放
-
 ## 许可
 
 MIT
