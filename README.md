@@ -1,59 +1,24 @@
 # distill-brain
 
-Your AI-powered second brain. Distills your unique understanding — not raw knowledge — from conversations, codebases, and practice into a persistent, navigable knowledge base that grows with you.
+A second brain that teaches you back. Built on [Karpathy's LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) architecture — same three layers (raw sources, compiled wiki, schema), but the wiki isn't just a reference. It's a tutor.
 
-Built on [Andrej Karpathy's LLM-wiki three-layer architecture](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f). Pure markdown, zero background processes, designed for how AI agents actually consume information.
+[中文版 README](README_CN.md) · [Read the idea file](https://gist.github.com/JieqLuo/41761c7fbe48b233f6bf6b50ddee5d95)
 
-[中文版 README](README_CN.md)
+## Why
 
-## What it does
+Karpathy's LLM Wiki solved a real problem: RAG re-derives knowledge on every query, while a persistent wiki compounds over time. The LLM does the bookkeeping — summarizing, cross-referencing, maintaining consistency — and the human curates sources and asks good questions. This works.
 
-Karpathy's LLM-wiki showed that an LLM can maintain a personal knowledge base — auto-ingesting sources, cross-referencing pages, keeping everything consistent. **distill-brain inherits that architecture, then asks a harder question: what knowledge is actually yours?**
+But I kept noticing something. My wiki had great entries that I couldn't explain to anyone. The LLM had read the papers, written the summaries, maintained the cross-references. I could search for anything and get a well-organized answer. But when someone asked me about a topic in my own wiki, I'd find myself re-reading my own pages to answer them.
 
-LLMs already know textbook content. A wiki that summarizes articles is just re-packaging what the model already has. The real value is what the model *doesn't* have — your judgments, your real-world validations, the gap between what the book says and what actually happened when you tried it.
+**The wiki knew things. I didn't.**
 
-**distill-brain = Karpathy's three-layer architecture + your processed understanding.** It captures everything (auto write-back to inbox), but what enters your core knowledge base is only what you've verified, challenged, and confirmed through your own thinking.
+This isn't a flaw in Karpathy's design — it's a different use case. His wiki is a **library**: you build it to look things up. What I wanted was a **tutor**: something that makes sure I understand what goes into it.
 
-No vector databases, no embeddings, no background processes. Just markdown files with a three-layer architecture that agents read on demand.
+In cognitive science, the *generation effect* shows that information you produce yourself — by explaining, by struggling with a question, by reconciling contradictions — is retained far better than information you passively read. The *testing effect* shows that retrieval strengthens memory more than additional study. distill-brain puts both to work: the LLM challenges you using your own knowledge base as context, and only writes the entry after you demonstrate understanding.
 
-### What makes it different
+The LLM Wiki is a library with a very good librarian. distill-brain adds a tutor who sits in the library. Before a book goes on the shelf, the tutor asks you what you learned from it. Before you commit to an idea, the tutor stress-tests it using everything else on the shelves. The library still works as a library. But you walk out knowing more than you walked in with.
 
-- **Stores processing, not knowledge.** LLMs already know textbook content. Your brain stores what they don't — your judgments, your real-world validations, the delta between theory and practice.
-- **Karpathy's three-layer architecture.** Raw Sources (immutable evidence) + Wiki (your processed knowledge) + Schema (how the brain works). Three co-existing layers inherited from Karpathy's LLM-wiki.
-- **Two-tier knowledge (inbox + domains).** inbox/ is the LLM's auto-maintained wiki — captures everything, nothing gets lost. domains/ is your confirmed knowledge — only entries verified through `/distill`, `/distill-learn`, or `/distill-challenge` enter. Like how your mind has "things you know" vs "things you've verified through experience".
-- **Socratic learning.** `/distill-learn` doesn't just save what you say. It challenges your understanding, tests transfer across domains using your existing brain entries, and only distills once you prove you get it.
-- **Three-layer challenge.** `/distill-challenge` uses your brain as targeting context but draws ammunition from outside — finding internal contradictions (Layer 1), attacking blind spots (Layer 2), and introducing perspectives you've never encountered (Layer 3).
-- **Repo comprehension.** `/distill-repo` helps you genuinely understand a codebase through guided Q&A — then "compiles" the knowledge so you never pay the full token cost again (60-80% savings on every subsequent access).
-- **Cognitive patterns.** Over time, the agent observes how you think — not just what you know — and stores distilled patterns that help future agents collaborate with you better.
-- **Platform-agnostic brain.** Pure markdown files. Works with Obsidian, any text editor, or any AI tool that can read files. Your brain is yours, not locked to any platform.
-
-## Architecture
-
-```
-                    Karpathy's Three Layers
-                    ──────────────────────
-
-~/.claude/brain/
-├── sources/              RAW SOURCES — immutable original materials
-│   ├── articles/         (LLM reads, never modifies)
-│   └── repos/
-│
-├── domains/              WIKI — your processed knowledge
-│   ├── ai-engineering/   (LLM maintains with user approval)
-│   ├── learning/         
-│   └── ...               
-│
-├── inbox/                Auto write-back buffer
-│                         (LLM captures → user triages → domains/)
-│
-├── journal/              Extraction logs
-└── .brain-config.yaml    SCHEMA — structure and conventions
-                          (along with SKILL.md)
-```
-
-**Three reads to find anything.** Root INDEX → domain INDEX → entry. ~200 lines total vs loading your entire brain.
-
-**Two-tier knowledge.** `inbox/` is the LLM's auto-maintained wiki (Karpathy's speed — nothing gets lost). `domains/` is your confirmed knowledge (only entries verified through `/distill`, `/distill-learn`, or `/distill-challenge` enter here). Quality requires human eyes — same as Karpathy, but you only need to look at what hasn't been verified through learning or challenge.
+**The librarian maintains the collection. The tutor maintains *you*.**
 
 ## Install
 
@@ -61,111 +26,103 @@ No vector databases, no embeddings, no background processes. Just markdown files
 git clone https://github.com/JieqLuo/distill-brain.git ~/.claude/skills/distill-brain
 ```
 
-That's it. No dependencies. No build step. No configuration required.
+No dependencies. No build step. No configuration required. Works with Claude Code out of the box.
 
-## Usage
+## How it works
 
-### Extract knowledge from a conversation
+### Two tiers: breadth + depth
 
-```
-/distill
-```
+The standard wiki pattern and the tutor pattern aren't mutually exclusive. They work as two tiers of the same system.
 
-Reviews the current conversation, identifies transferable knowledge, and presents candidates for your approval. Nothing is saved without your explicit confirmation.
+**`inbox/`** is auto-compiled. The LLM captures cross-domain connections, synthesis notes, repo analysis drafts. This layer grows fast. It's your breadth — things you've encountered but haven't deeply processed.
 
-### Rebuild indexes
+**`domains/`** is dialogue-gated. Nothing enters without verification. The LLM checks your understanding before writing the entry, or pressure-tests your idea before recording it. This layer grows slowly and deliberately. It's your depth — knowledge you've actually internalized.
 
-```
-/distill-compile
-```
+Most entries never leave inbox. That's fine. But for the things that matter — the patterns you'll apply to future problems, the decisions you'll make under pressure — the second tier makes sure you've done the work.
 
-Regenerates all INDEX.md files from current entries. Run after manual edits or imports.
+### Three paths into domains/ (all quality-guaranteed)
 
-### Search the knowledge base
+| Path | What happens | Entry gets |
+|------|-------------|-----------|
+| `/distill` | You extract and confirm | `confidence_source: extracted` |
+| `/distill-learn` | Socratic questioning proves you understand | `confidence_source: verified` |
+| `/distill-challenge` | Idea survives three-layer pressure testing | `confidence_source: challenged` |
 
-```
-/distill-search {query}
-```
-
-Agent navigates the three-layer index to find relevant knowledge. Max 5 file reads.
-
-### Visualize the knowledge graph
+### Architecture
 
 ```
-/distill-graph
+~/.claude/brain/
+├── sources/              RAW SOURCES — immutable originals
+│   ├── articles/         (LLM reads, never modifies)
+│   └── repos/
+│
+├── domains/              WIKI — your verified knowledge
+│   ├── ai-engineering/   (LLM maintains with user approval)
+│   ├── learning/
+│   └── ...
+│
+├── inbox/                Auto write-back buffer
+│                         (LLM captures → user triages → domains/)
+│
+├── journal/              Extraction logs
+└── .brain-config.yaml    SCHEMA — structure and conventions
 ```
 
-Scans all entries, builds a relationship graph, identifies hub nodes and clusters. Outputs a markdown report (`journal/graph-{date}.md`) and an interactive HTML visualization (`graph.html`) you can open in any browser.
+**Three reads to find anything.** Root INDEX → domain INDEX → entry. ~200 lines total vs loading your entire brain.
 
-### Audit knowledge quality
+## Commands
 
-```
-/distill-lint
-```
-
-Checks for stale entries, orphans, broken links, and duplicates. Presents findings with suggested fixes for your approval.
-
-### Triage inbox entries
+### Core loop
 
 ```
-/distill-triage
+/distill                    # Extract knowledge from conversation
+/distill-compile            # Rebuild all indexes
+/distill-search {query}     # Navigate the knowledge base
 ```
 
-Processes entries in `inbox/` — both manually submitted and auto-captured drafts. Proposes domain placement, infers relationships, and moves them into the brain structure after your confirmation.
-
-### Import from Claude Code memory
+### Learning
 
 ```
-/distill-import           # current project's memory
-/distill-import all       # scan all projects
-/distill-import {path}    # specific memory directory
+/distill-learn {topic}      # Socratic verification — prove you understand
+/distill-challenge {idea}   # Three-layer pressure test
+/distill-repo {url|path}    # Understand a codebase through guided Q&A
 ```
 
-Reads `MEMORY.md` and memory files, filters for transferable cross-project knowledge, and imports qualifying entries into the brain. Project-specific rules stay in auto memory.
+`/distill-learn` doesn't just save what you say. It asks you to explain in your own words, probes with "why" and "how" questions, cross-references your existing brain entries ("Your brain has X — how does this new concept relate?"), and only distills once you demonstrate comprehension.
 
-### Learn with verified understanding
+`/distill-challenge` uses your brain as targeting context but draws ammunition from outside. Layer 1: internal contradictions in your existing entries. Layer 2: blind spot attack — what's absent from your brain that the idea depends on. Layer 3: outside perspectives you've never encountered. No sycophancy — the challenger takes positions.
 
-```
-/distill-learn {topic}
-```
+`/distill-repo` reads a codebase progressively (file tree → architecture → key implementation files), then guides you through Socratic Q&A to understand the design decisions. Saves 60-80% tokens on every subsequent access.
 
-Socratic learning mode. Probes your understanding with why/how questions, tests transfer across domains using your existing brain entries, challenges weak spots and contradictions. Only distills once you demonstrate genuine comprehension. Entries get `confidence_source: verified`.
-
-### Pressure-test an idea
+### Maintenance
 
 ```
-/distill-challenge {idea or topic}
+/distill-graph              # Visualize relationships, find clusters
+/distill-lint               # Audit quality (stale, orphans, broken links)
+/distill-triage             # Process inbox → domains
+/distill-import [scope]     # Import from Claude Code memory
 ```
 
-Three-layer challenge mode. Layer 1: finds contradictions within your existing brain entries. Layer 2: attacks blind spots (what's missing from your brain). Layer 3: introduces perspectives from outside your knowledge graph entirely. No sycophancy — the challenger takes positions and states what evidence would change its mind. Surviving ideas get `confidence_source: challenged`.
+## What it stores
 
-### Understand a codebase
+LLMs already know textbook content. Storing it again is duplication with zero value. distill-brain stores what the model *doesn't* have:
 
-```
-/distill-repo {url or local path}
-```
+- **"I tried X and found Y"** — practice-validated knowledge
+- **"Author says X, but in my experience Z"** — corrected knowledge
+- **"This framework changed how I approach Y"** — adopted mental models
+- **"I was wrong about X because Y"** — updated beliefs
 
-Progressive repo analysis: file tree + README → architecture docs → key files. Guides you through Socratic Q&A to genuinely understand the design decisions. Stores both an architecture reference (always, since code may not be in training data) and your verified insights. Saves 60-80% tokens on every subsequent access.
+Over time, the agent also observes *how you think* — not just what you know — and stores cognitive patterns that help future agents collaborate with you better.
 
-## Where knowledge lives
+## Design principles
 
-By default, your knowledge base is stored at `~/.claude/brain/` as plain markdown files. You can configure the path in `.brain-config.yaml`.
-
-**Obsidian compatible.** Point the brain path to a folder inside your Obsidian vault, and your knowledge entries become browsable, searchable, and linkable in Obsidian — with full `[[wikilink]]` support. Entries maintain dual relationship views: `related` YAML for agents + `## Related` wikilinks for humans.
-
-## Design Principles
-
-**Philosophy over rules.** The SKILL.md doesn't tell the agent *what* to extract — it gives a thinking framework for *judging* what's worth extracting. The agent decides.
+**Philosophy over rules.** The SKILL.md gives a thinking framework for judging what's worth extracting. The agent decides.
 
 **Hard boundaries where they matter.** Entry format, quality floor, and safety rules are non-negotiable. Everything else — classification, confidence, relationships — is the agent's call.
 
 **Zero infrastructure.** No databases, no servers, no background processes. If your computer crashes, your knowledge is still there in readable markdown files.
 
-**Agent-native navigation.** Three-layer progressive disclosure means agents load ~200 lines to find what they need, not your entire brain.
-
-**Token-efficient by design.** Knowledge is "compiled" once and reused. Reading a brain entry (~100 lines) vs re-reading source material (~3000+ lines) saves 60-80% tokens on every subsequent access. The more you use it, the more you save.
-
-**AI captures, human decides.** inbox/ auto-accumulates (Karpathy's compounding). But domains/ only accepts knowledge you've verified through extraction, learning, or challenge. Quality requires human eyes — no shortcuts.
+**Obsidian compatible.** Point the brain path to a folder inside your Obsidian vault, and entries become browsable with full `[[wikilink]]` support. Entries maintain dual relationship views: `related` YAML for agents + `## Related` wikilinks for humans.
 
 ## Comparison
 
@@ -175,18 +132,18 @@ By default, your knowledge base is stored at `~/.claude/brain/` as plain markdow
 | Obsidian + manual | Human-curated vault | Conversations slip through |
 | Vector DB plugins | Embeddings + background agents | High memory usage, crashes over time |
 | RAG systems | Embeddings + retrieval | Infrastructure overhead, opaque |
-| Karpathy LLM-wiki | Auto-maintained markdown wiki | No learning verification, no challenge system |
-| AI tutoring tools | Content delivery + quizzes | No persistent knowledge graph, no cross-domain transfer |
-| **distill-brain** | **Karpathy's three-layer architecture + Socratic learning + three-layer challenge + cognitive patterns** | **Pure files, agent-navigable, platform-agnostic** |
+| Karpathy LLM-wiki | Auto-maintained markdown wiki | No learning verification |
+| AI tutoring tools | Content delivery + quizzes | No persistent knowledge graph |
+| **distill-brain** | **Three-layer architecture + Socratic learning + pressure testing** | **Pure files, agent-navigable, platform-agnostic** |
 
 ## Roadmap
 
-- [x] Phase 1: Core loop (`/distill`, `/distill-compile`, `/distill-search`)
-- [x] Phase 2: Graph + quality + triage (`/distill-graph`, `/distill-lint`, `/distill-triage`)
-- [x] Phase 3: Obsidian dual-view (YAML + wikilinks), proactive distill suggestions, cross-project sharing
-- [x] Phase 4: `/distill-repo`, `/distill-challenge`, Raw Sources layer, auto write-back to inbox
-- [ ] Phase 5: Multi-tool support (Codex, OpenCode, Factory Droid)
-- [ ] Phase 6: Interactive visualization — structure overview + live navigation replay
+- [x] Core loop (`/distill`, `/distill-compile`, `/distill-search`)
+- [x] Graph + quality + triage (`/distill-graph`, `/distill-lint`, `/distill-triage`)
+- [x] Obsidian dual-view, proactive distill suggestions, cross-project sharing
+- [x] `/distill-repo`, `/distill-challenge`, raw sources layer, auto write-back
+- [ ] Multi-tool support (Codex, OpenCode, Factory Droid)
+- [ ] Interactive visualization — structure overview + live navigation replay
 
 ## License
 

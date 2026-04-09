@@ -412,15 +412,27 @@ staleness_days:
 **Goal:** Analyze a codebase to extract architecture patterns and design decisions, guide the user to understand them through Socratic questioning, and store both the architecture reference and verified insights.
 
 **Must do:**
-1. Read the repo progressively — minimize token consumption:
-   - Layer 0: file tree + README (~100 lines) → understand what it is
-   - Layer 1: entry points + architecture docs (~500 lines) → understand structure
-   - Layer 2: specific files of interest → deep dive only as needed
-2. Present an architecture overview to the user — core structure, key design decisions, notable patterns. Keep it concise.
-3. Switch to Socratic mode: ask the user WHY questions about the architecture ("Why do you think they chose X over Y?"), test transfer against existing brain entries ("Your brain has Z — how does this repo's approach compare?")
-4. Store two types of entries after user confirmation:
+1. Read the repo progressively:
+   - Layer 0: file tree + README → understand what it is
+   - Layer 1: entry points + architecture docs → understand structure
+   - Layer 2: **AT LEAST 3** specific files that represent core design decisions → deep dive into actual implementation
+   - **You MUST complete Layer 2 before presenting anything to the user. "As needed" is not an option — Layer 2 is always needed.**
+2. Present architecture overview **with code-level evidence**:
+   - For each design decision, cite specific file and describe the relevant code pattern
+   - Present at least 3 concrete design decisions with evidence, not abstract descriptions
+   - **If you cannot cite code evidence for a claim, you haven't read enough. Go back to Layer 2.**
+3. **Quality gate before Socratic mode — must pass BOTH:**
+   - **Gate A (hard):** For each design decision you presented, can you explain WHY the author made that choice (not just WHAT)? If no → read more code. Do NOT proceed.
+   - **Gate B (thinking framework):** Read the user's brain INDEX, then answer these three questions internally before proceeding:
+     - What in this repo is **the same** as patterns already in the user's brain?
+     - What is **different** from what the user already knows?
+     - What is **worth learning** — new knowledge that would change the user's behavior in future projects?
+   - If you cannot identify at least one item for each question, you haven't understood the repo deeply enough. Go back to Layer 2.
+   - **Red flags that you're rushing:** your overview uses only information from README, you describe file structure without code content, you say "likely" or "probably" about design choices you could verify by reading the code.
+4. Switch to Socratic mode: use your Gate B answers to drive the conversation — ask the user about the differences and new patterns you found, test transfer against existing brain entries ("Your brain has Z — how does this repo's approach compare?")
+5. Store two types of entries after user confirmation:
    - `type: reference` — architecture skeleton with key design decisions and rationale. Always store this for repos, since code may not be in training data. `source: repo:{url}`
    - `type: insight/pattern` — user's verified understanding and cross-repo patterns. `confidence_source: verified`
-5. Run `/distill-compile` to update indexes
+6. Run `/distill-compile` to update indexes
 
-**Your call:** How deep to read the repo (adapt to repo size and complexity), which files are architecturally significant, how many Socratic questions to ask, what relationships to infer with existing brain entries, whether to suggest the user clone and explore the repo hands-on for deeper understanding.
+**Your call:** Which files are architecturally significant, how many Socratic questions to ask, what relationships to infer with existing brain entries, whether to suggest the user clone and explore the repo hands-on for deeper understanding.
